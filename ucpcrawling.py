@@ -11,7 +11,7 @@ import time
 import re
 
 client = MongoClient('mongodb+srv://Praktikum1Cloud:PawAnakBaik123@prakcloud.hpxi581.mongodb.net/')
-collections = client['ucp1']['CNBCIndo']
+collections = client['ucp1']['cnbcucp']
 
 def crawl_cnbc_hybrid_final():
     print("🤖 Mempersiapkan Robot Browser (Selenium)...")

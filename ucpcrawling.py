@@ -38,14 +38,14 @@ def crawl_cnbc_hybrid_final():
     time.sleep(5) 
 
 
-    jumlah_scroll = 3 # Naikkan angka ini jika ingin mengambil data yang lebih lawas
+    jumlah_scroll = 3 
     
     for i in range(jumlah_scroll):
         print(f"⬇️ Melakukan scroll ke bawah ({i+1}/{jumlah_scroll}) untuk memuat artikel...")
         driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
         time.sleep(4) 
 
-    # Ambil HTML setelah di-scroll penuh
+    # Mengumpulkan Semua Link Artikel
     html_matang = driver.page_source
     soup = BeautifulSoup(html_matang, 'html.parser')
     
@@ -69,6 +69,7 @@ def crawl_cnbc_hybrid_final():
 
     sukses_tersimpan = 0
 
+    # Ekstraksi Data Tiap Artikel (Requests & BeautifulSoup)
     for url in list_url_berita:
         try:
             # Cek Database
@@ -107,7 +108,7 @@ def crawl_cnbc_hybrid_final():
             thumbnail_meta = isi_soup.find('meta', attrs={'property': 'og:image'})
             thumbnail = thumbnail_meta['content'].strip() if thumbnail_meta else 'Thumbnail tidak ditemukan'
 
-            # 6. Isi Berita (Pembersihan Lanjutan & Strategi 3 Lapis)
+            # 6. Isi Berita 
             body_content = isi_soup.find('div', class_='detail_text') or isi_soup.find('div', class_='detail-text')
             
             # Jika bukan artikel reguler, coba cari wadah artikel video/foto

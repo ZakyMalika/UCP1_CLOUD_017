@@ -10,10 +10,6 @@ import random
 import time
 import re
 
-# ==========================================
-# 1. KONEKSI MONGODB
-# ==========================================
-# Pastikan Anda sudah melakukan Drop Collection di MongoDB Anda sebelum menjalankan ini
 client = MongoClient('mongodb+srv://Praktikum1Cloud:PawAnakBaik123@prakcloud.hpxi581.mongodb.net/')
 collections = client['ucp1']['CNBCIndo']
 
@@ -41,9 +37,7 @@ def crawl_cnbc_hybrid_final():
     print("⏳ Menunggu halaman dimuat...")
     time.sleep(5) 
 
-    # ==========================================
-    # LOGIKA SCROLLING OTOMATIS
-    # ==========================================
+
     jumlah_scroll = 3 # Naikkan angka ini jika ingin mengambil data yang lebih lawas
     
     for i in range(jumlah_scroll):
@@ -73,9 +67,6 @@ def crawl_cnbc_hybrid_final():
 
     print(f"🔍 Ditemukan TOTAL {len(list_url_berita)} link artikel. Memulai ekstraksi isi (Requests)...")
 
-    # ==========================================
-    # EKSTRAKSI ISI BERITA (REQUESTS)
-    # ==========================================
     sukses_tersimpan = 0
 
     for url in list_url_berita:
